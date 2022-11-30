@@ -3,8 +3,8 @@ public class Level1 {
         StringBuilder strBld = new StringBuilder(input);
         int len = strBld.length();
 
-        boolean flag = false;
-        int index = 0;
+        boolean isLetterGreater = false;
+        int startPoint = 0;
 
         for (int i = len - 1; i > -1; i--) {
             for (int j = i - 1; j > -1; j--) {
@@ -12,18 +12,18 @@ public class Level1 {
                     strBld.setCharAt(j, input.charAt(i));
                     strBld.setCharAt(i, input.charAt(j));
 
-                    flag = true;
-                    index = j;
+                    isLetterGreater = true;
+                    startPoint = j;
                     break;
                 }
             }
 
-            if (flag) break;
+            if (isLetterGreater) break;
         }
 
-        if (!flag) return "";
+        if (!isLetterGreater) return "";
 
-        for (int i = index + 1; i < len; i++) {
+        for (int i = startPoint + 1; i < len; i++) {
             for (int j = i + 1; j < len; j++) {
                 if (strBld.charAt(i) > strBld.charAt(j)) {
                     char ch = strBld.charAt(i);
