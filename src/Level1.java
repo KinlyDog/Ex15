@@ -1,16 +1,17 @@
 public class Level1 {
     public static String BiggerGreater(String input) {
-        StringBuilder strBld = new StringBuilder(input);
-        int len = strBld.length();
+        StringBuilder string = new StringBuilder(input);
+        final int STR_LENGTH = string.length();
 
         boolean isLetterGreater = false;
         int startPoint = 0;
 
-        for (int i = len - 1; i > -1; i--) {
+        // проверяем можно ли получить лексикографически большее слово
+        for (int i = STR_LENGTH - 1; i > -1; i--) {
             for (int j = i - 1; j > -1; j--) {
                 if (input.charAt(i) > input.charAt(j)) {
-                    strBld.setCharAt(j, input.charAt(i));
-                    strBld.setCharAt(i, input.charAt(j));
+                    string.setCharAt(j, input.charAt(i));
+                    string.setCharAt(i, input.charAt(j));
 
                     isLetterGreater = true;
                     startPoint = j;
@@ -23,16 +24,17 @@ public class Level1 {
 
         if (!isLetterGreater) return "";
 
-        for (int i = startPoint + 1; i < len; i++) {
-            for (int j = i + 1; j < len; j++) {
-                if (strBld.charAt(i) > strBld.charAt(j)) {
-                    char ch = strBld.charAt(i);
-                    strBld.setCharAt(i, strBld.charAt(j));
-                    strBld.setCharAt(j, ch);
+        // находим наименьшее из лексикографически больших слов
+        for (int i = startPoint + 1; i < STR_LENGTH; i++) {
+            for (int j = i + 1; j < STR_LENGTH; j++) {
+                if (string.charAt(i) > string.charAt(j)) {
+                    char ch = string.charAt(i);
+                    string.setCharAt(i, string.charAt(j));
+                    string.setCharAt(j, ch);
                 }
             }
         }
 
-        return strBld.toString();
+        return string.toString();
     }
 }
